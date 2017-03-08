@@ -1,4 +1,4 @@
-from DSAndAlgorithms.stack import Stack
+from DSAndAlgorithms.DSModule.stack import Stack
 
 
 class ParenthesesChecker:
@@ -15,7 +15,7 @@ class ParenthesesChecker:
         index = 0
         while index < len(symbolStr) and balanced:
             symbol = symbolStr[index]
-            if symbol == '(':
+            if symbol in '([{':
                 s.push(symbol)
             else:
                 if s.isempty():
@@ -30,15 +30,15 @@ class ParenthesesChecker:
         else:
             return False
 
-    def matches(self, top, symbol):
+    def matches(self, top, close):
         opens = "({["
         closes = ")}]"
-        return opens.index(top) == closes.index(symbol)
+        return opens.index(top) == closes.index(close)
 
 
 if __name__ == '__main__':
     obj = ParenthesesChecker()
-    print(obj.Check("([])"))
+    print(obj.Check("([])("))
     print(obj.Check("()()((((((((((((()))))))))))))"))
 
 

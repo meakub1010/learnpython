@@ -1,4 +1,4 @@
-from DSAndAlgorithms.stack import Stack
+from DSAndAlgorithms.DSModule.stack import Stack
 
 
 class ConvertNumbers:
@@ -9,12 +9,12 @@ class ConvertNumbers:
             s.push(number % 2)
             number //= 2
 
-        binString = ""
+        result_string = ""
         while not s.isempty():
-            binString += str(s.pop()) + ' '
+            result_string += str(s.pop()) + ' '
 
-        return binString
+        return result_string
 
 if __name__ == '__main__':
     obj = ConvertNumbers()
-    print(obj.convertdecimaltobinary(24))
+    print(obj.convertdecimaltobinary(30))
