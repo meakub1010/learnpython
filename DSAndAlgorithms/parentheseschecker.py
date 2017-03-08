@@ -21,16 +21,24 @@ class ParenthesesChecker:
                 if s.isempty():
                     balanced = False
                 else:
-                    s.pop()
+                    top = s.pop()
+                    if not self.matches(top, symbol):
+                        balanced = False
             index += 1
         if balanced and s.isempty():
             return True
         else:
             return False
 
+    def matches(self, top, symbol):
+        opens = "({["
+        closes = ")}]"
+        return opens.index(top) == closes.index(symbol)
+
+
 if __name__ == '__main__':
     obj = ParenthesesChecker()
-    print(obj.Check("(((())()())))"))
+    print(obj.Check("([])"))
     print(obj.Check("()()((((((((((((()))))))))))))"))
 
 
