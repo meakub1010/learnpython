@@ -39,4 +39,6 @@ def convert_infix_to_postfix(infixexpr):
 
 print("A * B + C * D ===> ", convert_infix_to_postfix("A * B + C * D"))
 
-print("(A + B) * C / D ===>", convert_infix_to_postfix("( A + B ) * C / D"))
+print("( A + B ) * C / D ===>", convert_infix_to_postfix("( A + B ) * C / D"))
+
+print("A + B * C ===>", convert_infix_to_postfix("A + B * C"))
