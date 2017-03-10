@@ -2,12 +2,7 @@ from DSAndAlgorithms.DSModule.stack import Stack
 
 
 def convert_infix_to_postfix(infixexpr):
-    precedence_dict = {}
-    precedence_dict["*"] = 3
-    precedence_dict["/"] = 3
-    precedence_dict["+"] = 2
-    precedence_dict["-"] = 2
-    precedence_dict["("] = 1
+    precedence_dict = {"*": 3, "/": 3, "+": 2, "-": 2, "(": 1}
 
     opStack = Stack()
 
@@ -16,7 +11,7 @@ def convert_infix_to_postfix(infixexpr):
     tokenList = infixexpr.split()
 
     for token in tokenList:
-        if token in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or token in "0123456789":
+        if token in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or token.isnumeric():
             result_string.append(token)
         elif token == '(':
             opStack.push(token)
@@ -30,15 +25,18 @@ def convert_infix_to_postfix(infixexpr):
                 result_string.append(opStack.pop())
             opStack.push(token)
 
-
     while not opStack.isempty():
         result_string.append(opStack.pop())
 
     return " ".join(result_string)
 
 
-print("A * B + C * D ===> ", convert_infix_to_postfix("A * B + C * D"))
+#print("A * B + C * D ===> ", convert_infix_to_postfix("A * B + C * D"))
 
-print("( A + B ) * C / D ===>", convert_infix_to_postfix("( A + B ) * C / D"))
+#print("( A + B ) * C / D ===>", convert_infix_to_postfix("( A + B ) * C / D"))
 
-print("A + B * C ===>", convert_infix_to_postfix("A + B * C"))
+#print("A + B * C ===>", convert_infix_to_postfix("A + B * C"))
+
+#print(convert_infix_to_postfix("10 + 3 * 5 / ( 16 - 4 )"))
+
+print(convert_infix_to_postfix("5 * 3 ** ( 4 - 2 )"))
