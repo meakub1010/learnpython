@@ -1,4 +1,5 @@
 """ Model for aircraft flights """
+from pprint import pprint as pp
 
 
 class Flight:
@@ -28,6 +29,36 @@ class Flight:
     def aircraft_model(self):
         return self._aircraft.model()
 
+    def _parse_seat(self, seat):
+        row_numbers, seat_letters = self._aircraft.seating_plan()
+
+        # print(rows)
+        # print(seat_letters)
+
+        letter = seat[-1]
+        if letter not in seat_letters:
+            raise ValueError("Invalid seat letter {}".format(letter))
+
+        row_text = seat[:-1]
+        try:
+            row = int(row_text)
+        except ValueError:
+            raise ("Invalid seat row {}".format(row_text))
+
+        if row not in row_numbers:
+            raise ValueError("Seat {} already occupied".format(row))
+
+        return row, letter
+
+    def allocate_seat(self,seat, passenger):
+        row, letter = self._parse_seat(seat)
+
+        # print(letter)
+        # print(row_text)
+        if self._seating[row][letter] is not None:
+            raise ValueError("Invalid row number {}".format(seat))
+        self._seating[row][letter] = passenger
+
 
 class Aircraft:
     def __init__(self, registration, model, num_rows, num_seats_per_row):
@@ -44,4 +75,19 @@ class Aircraft:
 
     def seating_plan(self):
         return range(1, self._num_rows + 1), "ABCDEFGHJK"[:self._num_seats_per_row]
+
+
+if __name__ == "__main__":
+    f = Flight("SN232", Aircraft("G-EUPT", "Airbus 319", num_rows=22, num_seats_per_row=6))
+    f.allocate_seat("1A", "Abdur Rahim")
+    f.allocate_seat("2A","Kamran Akmal")
+    f.allocate_seat("7D", "Rohit Sharma")
+    f.allocate_seat("6A", "Abdur Rahim")
+    f.allocate_seat("2B", "Kamran Akmal")
+    f.allocate_seat("7C", "Rohit Sharma")
+    f.allocate_seat("1D", "Abdur Rahim")
+    f.allocate_seat("2E", "Kamran Akmal")
+    f.allocate_seat("7F", "Rohit Sharma")
+
+    pp(f._seating)
 
