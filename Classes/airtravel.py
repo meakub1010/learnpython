@@ -16,6 +16,8 @@ class Flight:
 
         self._number = number  # 1. _ used to avoid name clash with method named ""
         self._aircraft = aircraft
+        rows, seats = self._aircraft.seating_plan()
+        self._seating = [None] + [{letter:None for letter in seats} for _ in rows]
 
     def number(self):
         return self._number
