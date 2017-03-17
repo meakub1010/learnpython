@@ -59,6 +59,23 @@ class Flight:
             raise ValueError("Invalid row number {}".format(seat))
         self._seating[row][letter] = passenger
 
+    def reallocate_seat(self, from_seat, to_seat):
+        """
+        Relocate passenger from a seat to another seat
+        :param from_seat:
+        :param to_seat:
+        """
+        from_row, from_letter = self._parse_seat(from_seat)
+        if self._seating[from_row][from_letter] is None:
+            raise ValueError("No passenger to relocate in seat {}".format(from_seat))
+
+        to_row, to_letter = self._parse_seat(to_seat)
+        if self._seating[to_row][to_letter] is not None:
+            raise ValueError("Seat {} is already occupied".format(to_seat))
+
+        self._seating[to_row][to_letter] = self._seating[from_row][from_letter]
+        self._seating[from_row][from_letter] = None
+
 
 class Aircraft:
     def __init__(self, registration, model, num_rows, num_seats_per_row):
