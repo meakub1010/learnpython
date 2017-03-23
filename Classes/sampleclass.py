@@ -38,6 +38,8 @@ class D:
 
     x = property(getx, setx, delx, "Property of D class")
 
+
+
 if __name__ == '__main__':
     obj = C()
     obj.x = 5
