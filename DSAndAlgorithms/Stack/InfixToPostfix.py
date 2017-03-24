@@ -2,7 +2,7 @@ from DSAndAlgorithms.DSModule.stack import Stack
 
 
 def convert_infix_to_postfix(infixexpr):
-    precedence_dict = {"*": 3, "/": 3, "+": 2, "-": 2, "(": 1}
+    precedence_dict = {"**": 4, "*": 3, "/": 3, "+": 2, "-": 2, "(": 1}
 
     opStack = Stack()
 
